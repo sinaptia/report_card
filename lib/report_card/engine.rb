@@ -6,7 +6,7 @@ module ReportCard
       if Rails.env.development?
         reports = Dir[Rails.root.join('app/reports/**/*.rb')]
         config.eager_load_paths += reports
-        ActionDispatch::Reloader.to_prepare do
+        ActiveSupport::Reloader.to_prepare do
           reports.each { |f| require_dependency f }
         end
       end
