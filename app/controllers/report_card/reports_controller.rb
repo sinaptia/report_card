@@ -13,7 +13,7 @@ module ReportCard
         end
 
         flash_success = params[:flash_success] || instance_eval(&ReportCard.flash_success)
-        ReportCard::Runner.perform_async(params)
+        ReportCard::Runner.perform_async(params.to_unsafe_h)
         redirect_back fallback_location: root_path, flash: { success: flash_success }
       else
         redirect_back fallback_location: root_path, flash: { error: 'Could not find report' }
